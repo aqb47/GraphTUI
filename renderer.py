@@ -54,6 +54,7 @@ def plot_points(graph: list, points: list) -> list:
     return graph
 
 
+# Temporary test code
 if __name__ == "__main__":
     graph = draw_axis([29, 119])
 
