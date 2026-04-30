@@ -5,10 +5,10 @@
 from os import get_terminal_size
 
 
-# Default configuration for grid size is set to size of terminal, considering the nearest lowest odd number
+# Default configuration for grid size is set near to size of terminal, considering the nearest lowest odd number
 def get_default_config() -> tuple:
-    cols: int = get_terminal_size().columns
-    rows: int = get_terminal_size().lines
+    cols: int = get_terminal_size().columns - 2
+    rows: int = get_terminal_size().lines - 2
 
     if cols % 2 == 0:
         cols -= 1

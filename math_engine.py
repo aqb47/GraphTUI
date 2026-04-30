@@ -80,36 +80,4 @@ def generate_points(function: callable, x_min: float, x_max: float, step: float)
 
     return points
 
-
-# Temporary test code to demonstrate functionality
-if __name__ == "__main__":
-    # My default values for testing purposes
-    TOTAL_X_UNITS: int = 12
-    TOTAL_Y_UNITS: int = 10
-
-    # The step is interval between x-axis values for calculating y-axis values. 
-    STEP: float = 0.05
-
-    # Generate points from a mathematical function
-    function: callable = get_function()
-    points: list[list[float]] = generate_points(function, - TOTAL_X_UNITS / 2, TOTAL_X_UNITS / 2, STEP)
-
-    # The scale is rows or cols per unit on x or y-axis respectively
-    ROW_SCALE: float = get_default_config()[0] / TOTAL_Y_UNITS
-    COL_SCALE: float = get_default_config()[1] / TOTAL_X_UNITS
-
-    # Initialize graph 
-    graph: list = draw_axis()
-
-    # Plot the points and add labels to the graph
-    graph = plot_points(graph, points, COL_SCALE, ROW_SCALE)
-    graph = add_labels(graph, TOTAL_X_UNITS, TOTAL_Y_UNITS)
-
-    # Print the graph to the terminal
-    for row in graph:
-        for char in row:
-            print(char, end='')
-        print()
-    
-    input("")
     
