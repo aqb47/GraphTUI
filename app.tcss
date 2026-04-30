@@ -1,0 +1,9 @@
+MainMenu {
+    align: center middle;
+    padding: 3;
+}
+
+Button {
+    margin: 1;
+    width: 100%;
+}
