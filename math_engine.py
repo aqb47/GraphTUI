@@ -3,7 +3,7 @@
 
 import re
 
-from sympy import Expr, symbols, lambdify, im
+from sympy import Expr, symbols, lambdify
 from sympy.parsing.sympy_parser import parse_expr
 
 from renderer import draw_axis, get_default_config, plot_points, add_labels
@@ -15,8 +15,6 @@ ALLOWED_CONSTANTS: list[str] = ['pi', 'E']
 
 # Sanitize and validate user function, raise an error if invalid
 def validate_function(function: str) -> None:
-    is_valid: bool = True
-
     # Check if only allowed characters are used
     if not ALLOWED_SYMBOLS.match(function.strip().lower()):
         raise ValueError("Invalid characters in function.")
@@ -66,7 +64,7 @@ def generate_points(function: callable, x_min: float, x_max: float, step: float)
             y: float = function(x)
 
             # If y is complex
-            if im(y) != 0:
+            if isinstance(y, complex):
                 x += step
                 continue
                 
