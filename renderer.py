@@ -69,7 +69,7 @@ def plot_points(graph: list, points: list, col_scale: float, row_scale: float) -
             continue
 
         # Plot the point
-        graph[row][col] = '*'
+        graph[row][col] = '.'
 
     return graph
 

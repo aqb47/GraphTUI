@@ -1,4 +1,4 @@
-# Takes a function string and a range (although for now it is fixed to -10 to 10)
+# Takes a function string and a range 
 # Returns a list of [x, y] points that can be plotted on the graph
 
 import re
@@ -9,53 +9,49 @@ from sympy.parsing.sympy_parser import parse_expr
 from renderer import draw_axis, get_default_config, plot_points, add_labels
 
 ALLOWED_SYMBOLS: re.Pattern = re.compile(r'^[0-9x\s\+\-\*\/\^\(\)\.\,a-z]+$')
-ALLOWED_FUNCTIONS: list[str] = ['sin()', 'cos()', 'tan()', 'log()', 'sqrt()', 'exp()', 'abs()']
+ALLOWED_FUNCTIONS: list[str] = ['sin', 'cos', 'tan', 'log', 'sqrt', 'exp', 'abs']
 ALLOWED_CONSTANTS: list[str] = ['pi', 'E']
 
 
-# Sanitize and validate user function
-def validate_function(function: str) -> bool:
+# Sanitize and validate user function, raise an error if invalid
+def validate_function(function: str) -> None:
+    is_valid: bool = True
+
     # Check if only allowed characters are used
     if not ALLOWED_SYMBOLS.match(function.strip().lower()):
-        return False
+        raise ValueError("Invalid characters in function.")
 
-    # Get alphabet characters (except x) and parentheses from function to check for used functions
-    used_functions: str = "".join([char for char in function if char.isalpha() or char == '(' or char == ')']).replace('x', '')
+    # Check if only allowed functions, constants and variables are used
+    tokens = re.findall(r'[a-zA-Z]+', function)
 
-    # Replace constants for function checking
-    for allowed_constant in ALLOWED_CONSTANTS:
-        used_functions = used_functions.replace(allowed_constant, '')
+    if not all(token in set(ALLOWED_FUNCTIONS + ALLOWED_CONSTANTS + ['x']) for token in tokens):
+        raise ValueError("Invalid functions, constants or variables used in function.")
 
-    # Check if only allowed functions are used
-    if used_functions:
-        for allowed_function in ALLOWED_FUNCTIONS:
-            if allowed_function in used_functions:
-                break
-        else:
-            return False
-    
-    return True
+    return
 
 
-# Return a callable function from user input string
-def get_function() -> callable:
-    # Initially input function
-    function: str = input("Enter a function of x [e.g. sin(x), x**2, log(x)]: ")
-
-    # Sympy recognizes Euler's number as E
-    function = re.sub(r'\be\b', 'E', function)
-
-    # Validate function and raise error if invalid
-    is_valid: bool = validate_function(function)
-    if not is_valid:
-        raise ValueError("Invalid function.")
-
-    # Parse function and convert to callable
+# Parse function string and return a callable function
+def parse_function(function: str) -> callable:
     x: symbols = symbols('x')
     expr: Expr = parse_expr(function)
     output_function: callable = lambdify(x, expr, 'math')
     
     return output_function
+
+
+# Return a callable function from user input string
+def get_function() -> callable:
+    # Initially input function. Won't be used in final version when textual is used for input
+    function: str = input("Enter a function of x [e.g. sin(x), x**2, log(x)]: ")
+
+    # Sympy recognizes Euler's number as E
+    function = re.sub(r'\be\b', 'E', function)
+
+    # Validate function 
+    validate_function(function)
+
+    # Parse function and convert to callable
+    return parse_function(function)
 
 
 # Generate points from function for a given range and step size
@@ -74,6 +70,7 @@ def generate_points(function: callable, x_min: float, x_max: float, step: float)
                 x += step
                 continue
                 
+            # Add to list
             points.append([x, y])
         
         # Handle math errors
