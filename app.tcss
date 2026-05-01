@@ -7,3 +7,23 @@ Button {
     margin: 1;
     width: 100%;
 }
+
+Input {
+    width: 50%;
+    align: center middle;
+}
+
+.bold {
+    text-style: bold;
+}
+
+.italic {
+    text-style: italic;
+}
+
+.title {
+    text-style: bold;
+    text-align: center;
+    margin-bottom: 2;
+    margin-top: 1;
+}

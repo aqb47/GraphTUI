@@ -6,8 +6,6 @@ import re
 from sympy import Expr, symbols, lambdify
 from sympy.parsing.sympy_parser import parse_expr
 
-from renderer import draw_axis, get_default_config, plot_points, add_labels
-
 ALLOWED_SYMBOLS: re.Pattern = re.compile(r'^[0-9x\s\+\-\*\/\^\(\)\.\,a-z]+$')
 ALLOWED_FUNCTIONS: list[str] = ['sin', 'cos', 'tan', 'log', 'sqrt', 'exp', 'abs']
 ALLOWED_CONSTANTS: list[str] = ['pi', 'E']
@@ -37,7 +35,7 @@ def parse_function(function: str) -> callable:
     return output_function
 
 
-# Return a callable function from user input string
+# Return a callable function from user input string. Test only
 def get_function() -> callable:
     # Initially input function. Won't be used in final version when textual is used for input
     function: str = input("Enter a function of x [e.g. sin(x), x**2, log(x)]: ")
@@ -79,5 +77,3 @@ def generate_points(function: callable, x_min: float, x_max: float, step: float)
         x += step
 
     return points
-
-    
