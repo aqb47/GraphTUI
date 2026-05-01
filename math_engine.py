@@ -35,21 +35,6 @@ def parse_function(function: str) -> callable:
     return output_function
 
 
-# Return a callable function from user input string. Test only
-def get_function() -> callable:
-    # Initially input function. Won't be used in final version when textual is used for input
-    function: str = input("Enter a function of x [e.g. sin(x), x**2, log(x)]: ")
-
-    # Sympy recognizes Euler's number as E
-    function = re.sub(r'\be\b', 'E', function)
-
-    # Validate function 
-    validate_function(function)
-
-    # Parse function and convert to callable
-    return parse_function(function)
-
-
 # Generate points from function for a given range and step size
 def generate_points(function: callable, x_min: float, x_max: float, step: float) -> list[list[float]]:
     points: list[list[float, float]] = []

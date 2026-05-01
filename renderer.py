@@ -7,8 +7,8 @@ from os import get_terminal_size
 
 # Default configuration for grid size is set near to size of terminal, considering the nearest lowest odd number
 def get_default_config() -> tuple:
-    cols: int = get_terminal_size().columns - 2
-    rows: int = get_terminal_size().lines - 2
+    cols: int = get_terminal_size().columns - 4
+    rows: int = get_terminal_size().lines - 4
 
     if cols % 2 == 0:
         cols -= 1
@@ -69,7 +69,7 @@ def plot_points(graph: list, points: list, col_scale: float, row_scale: float) -
             continue
 
         # Plot the point
-        graph[row][col] = '•'
+        graph[row][col] = '·'
 
     return graph
 
