@@ -170,15 +170,17 @@ class GraphDisplayScreen(Screen):
     
     # Regenerate graph on screen resize to fit new dimensions
     def on_resize(self, event) -> None:
+        # Debouncing by delaying regeneration
+        self.set_timer(0.2, self._regenerate_graph)
+    
+    def _regenerate_graph(self) -> None:
         try:
             graph = generate_complete_graph(self.function, self.total_x_units, self.total_y_units, self.step)
-            
-            self.screen.query_one("#graph_output", Static).update("\n".join("".join(row) for row in graph))
-            
+    
+            self.query_one("#graph_output", Static).update("\n".join("".join(row) for row in graph))
             self.refresh()
         except IndexError:
-            self.screen.query_one("#graph_output", Static).update("Graph cannot be displayed at this size.")
-            
+            self.query_one("#graph_output", Static).update("Graph cannot be displayed at this size.")
             self.refresh()
 
 
@@ -191,7 +193,7 @@ class ErrorScreen(Screen):
     def compose(self) -> ComposeResult:
         yield Static("ERROR", classes="title")
         
-        yield Static(self.message)
+        yield Static(self.message, id="error_message")
         yield Static('\n')
 
         yield Button("Back", id="back")
