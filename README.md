@@ -4,7 +4,7 @@ An ASCII-styled graphing calculator that runs in your terminal.
 ### The Concept
 This is my final project submission for Harvard's CS50x. 
 
-Basically I really like generating graphs and visualisations using matplotlib, and I absolutely love making ASCII art. So, I wanted to combine these two things and make a project in Python where you could generate simple graphs of mathematical functions in a copy-pastable format. 
+Basically, I really like generating graphs and visualisations using matplotlib, and I absolutely love making ASCII art. So, I wanted to combine these two things and make a project in Python where you could generate simple graphs of mathematical functions in a copy-pastable format. 
 
 You definitely won't get the clearest graphs in the world with my project but I aimed to make it a tool which can be used to quickly and roughly visualize simple functions while having easy control on the scale and step of the graph generation.
 
@@ -14,10 +14,10 @@ Right off the bat I knew I wanted to make this in Python, and with the use of AS
 
 I contemplated between using the windows-curses and Textual modules for making this project, but ended up using Textual due to it's incredible simplicity yet powerful features. Seriously, this module was so fun to use, it's like writing simple HTML and CSS in your terminal, all the while getting an amazing looking UI with minimal effort. It's very beginner-friendly too and I would highly recommend for someone to pick it up.
 
-#### Graph rendering
+#### Graph Rendering
 Having decided on the UI with Textual, I started building the main graph rendering logic in renderer.py. Depending on the current screen size of the terminal, the program just generates a 2D list, draws the axes, plots the points (which depends on the total x,y axes values) and adds labels on thr axes.  
 
-#### Point generation
+#### Point Generation
 The point generation before plotting is done in math_engine.py. Specifically, I decided on using the sympy module for parsing a function string. Deciding on how to parse user input was a headache, I couldn't use the built in eval() due to it's vulnerabilities so I used the parse_expr() function in sympy with sanitized user input. For this I had to use some regular expressions and limit some functions and constants.
 
 After getting the function though the point generation is pretty simple. Based on the step value (interval between points x values) the program generates a list of points. I made sure to use lambdify() with a math module backend to get quicker point generation beforehand.
