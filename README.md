@@ -13,7 +13,7 @@ Right off the bat I knew I wanted to make this in Python, and with the use of AS
 I contemplated between using the windows-curses and Textual modules for making this project, but ended up using Textual due to it's incredible simplicity yet powerful features. Seriously, this module was so fun to use, it's like writing simple HTML and CSS in your terminal, all the while getting an amazing looking UI with minimal effort. It's very beginner-friendly too and I would highly recommend for someone to pick it up.
 
 #### Graph Rendering
-Having decided on the UI with Textual, I started building the main graph rendering logic in renderer.py. Depending on the current screen size of the terminal, the program just generates a 2D list, draws the axes, plots the points (which depends on the total x,y axes values) and adds labels on thr axes.  
+Having decided on the UI with Textual, I started building the main graph rendering logic in renderer.py. Depending on the current screen size of the terminal, the program just generates a 2D list, draws the axes, plots the points (which depends on the total x, y axes values) and adds labels on the axes.  
 
 #### Point Generation
 The point generation before plotting is done in math_engine.py. Specifically, I decided on using the sympy module for parsing a function string. Deciding on how to parse user input was a headache, I couldn't use the built in eval() due to it's vulnerabilities so I used the parse_expr() function in sympy with sanitized user input. For this I had to use some regular expressions and limit some functions and constants.
