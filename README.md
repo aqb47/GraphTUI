@@ -21,7 +21,9 @@ The point generation before plotting is done in math_engine.py. Specifically, I 
 After getting the function though the point generation is pretty simple. Based on the step value (interval between points x values) the program generates a list of points. I made sure to use lambdify() with a math module backend to get quicker point generation beforehand.
 
 #### Tying It Together
-The Textual App uses a graph generation screen to get the total x-axis, y-axis values along with the function string and step value input from the user. Based on that information using the math engine and renderer you get a finished graph, free to be copied and resized as one wishes.
+The Textual App uses a graph generation screen to get the total x-axis, y-axis values along with the function string and step value input from the user. Based on that information using the math engine and renderer you get a finished graph, free to be copied and resized as one wishes. 
+
+I made sure to put in a few other screens - a help screen for general instructions and an error screen in case something goes wrong. With the help of Textual and it's event handlers, resizing the terminal window automatically regenerates the graph. And with some debouncing to smooth everything out I managed to implement a basic version of my intial idea.
 
 ### How To Use
 Clone the repository and run 'app.py'. Make sure you have the sympy and Textual modules installed along with Python.
@@ -44,6 +46,8 @@ This is because when we write y (/f(x)) = sqrt(16 - x**2) for example, the sqrt(
 - Some UI design with .tcss files
 
 - Event handling
+
+- Actually reading documentation
 
 ### What I Want to Add
 - Abillity to plot two or more functions at once
