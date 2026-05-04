@@ -148,6 +148,8 @@ class GraphBuilderScreen(Screen):
                 self.app.push_screen(ErrorScreen("Invalid function input. Check function arguments."))
             except TokenError:
                 self.app.push_screen(ErrorScreen("Invalid function input. Check for uncompleted parentheses."))
+            except OverflowError:
+                self.app.push_screen(ErrorScreen("Graph cannot be generated with the given specifications. Try increasing step size."))
 
     def action_generate(self) -> None:
         self.screen.query_one("#generate", Button).press()
