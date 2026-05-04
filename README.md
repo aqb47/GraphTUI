@@ -8,9 +8,9 @@ You definitely won't get the clearest graphs in the world with my project but I 
 
 ### My Implementation Details
 #### The UI
-Right off the bat I knew I wanted to make this in Python, and with the use of ASCII graphs clearly depending on monospace fonts (like consolas) I thought it would be good to have it run in the terminal using a TUI (Terminal User Interface) with a basic menu and input handling. 
+I knew I wanted to make this in Python, and with the use of ASCII graphs clearly depending on monospace fonts (like consolas) I thought it would be good to have it run in the terminal using a TUI (Terminal User Interface) with a basic menu and input handling. 
 
-I contemplated between using the windows-curses and Textual modules for making this project, but ended up using Textual due to it's incredible simplicity yet powerful features. Seriously, this module was so fun to use, it's like writing simple HTML and CSS in your terminal, all the while getting an amazing looking UI with minimal effort. It's very beginner-friendly too and I would highly recommend for someone to pick it up.
+I contemplated between using the windows-curses and Textual packages for making this project, but ended up using Textual due to it's incredible simplicity yet powerful features. Seriously, this module was so fun to use, it's like writing simple HTML and CSS in your terminal, all the while getting an amazing looking UI with minimal effort. It's very beginner-friendly too and I would highly recommend for someone to pick it up. Textual mainly works with classes so this project was a good way to get started with Object Oriented Programming for me. 
 
 #### Graph Rendering
 Having decided on the UI with Textual, I started building the main graph rendering logic in renderer.py. Depending on the current screen size of the terminal, the program just generates a 2D list, draws the axes, plots the points (which depends on the total x, y axes values) and adds labels on the axes.  
@@ -27,6 +27,30 @@ The Textual App uses a graph generation screen to get the total x-axis, y-axis v
 Clone the repository and run 'app.py'. Make sure you have the sympy and Textual modules installed along with Python.
 
 ### Issues
-Certain functions don't generate due to an overflow error (e.g x^x^x). This problem can get amplified with a huge x-axis range and small step sizes. 
-One of the biggest gripes I have is that you can't generate a whole circle, just half of it. This is because when we write y (/f(x)) = sqrt(16 - x**2) for example, the sqrt() function returns only the principal (non-negative) square root. This should be a simple fix, but I'd have to write my own square root function and change the expression parsing logic for it to work.
+- Certain functions don't generate due to an overflow error (e.g x^x^x). This problem can get amplified with a huge x-axis range and small step sizes. 
+
+- One of the biggest gripes I have is that you can't generate a whole circle, just half of it. 
+This is because when we write y (/f(x)) = sqrt(16 - x**2) for example, the sqrt() function returns only the principal (non-negative) square root. This should be a simple fix, but I'd have to write my own square root function and change the expression parsing logic for it to work.
+
+### What I Learnt
+- OOP with Textual
+
+- Using 2D lists in Python 
+
+- Validation and parsing of user input
+
+- Use of math-based libraries like Sympy for symbolic expressions
+
+- Some UI design with .tcss files
+
+- Event handling
+
+### What I Want to Add
+- Abillity to plot two or more functions at once
+
+- Riemann-sum integration
+
+- Tangents at specified points
+
+- A fixed sqrt() function
 
